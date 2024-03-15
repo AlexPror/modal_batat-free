@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "imageUrl": "https://yellowchimney.com/wp-content/uploads/2017/01/DSC_4166-1-e1484743363420.jpg",
+    "title": "Батат фри",
+    "price": 220,
+    "weight": {
+      "value": 140,
+      "unit": "г"
+    },
+    "kbzhu": {
+      "belki": 26.7,
+      "fat": 17.38,
+      "uglevody": 17.20,
+      "kallorii": 324.08
+    }
+  },
+  {
+    "id": 2,
+    "imageUrl": "https://media.istockphoto.com/id/157431311/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D1%8D%D0%BD%D0%B4%D0%B2%D0%B8%D1%87-%D1%81-%D0%B8%D0%BD%D0%B4%D0%B5%D0%B9%D0%BA%D0%BE%D0%B9.jpg?s=612x612&w=0&k=20&c=SDQNmQVG-YUc5zR3FM9OcOvnU5v0fZ-9MmusnQys_Bc=",
+    "title": "Бутерброд",
+    "price": 500,
+    "weight": {
+      "value": 220,
+      "unit": "г"
+    },
+    "kbzhu": {
+      "belki": 56.7,
+      "fat": 57.38,
+      "uglevody": 57.20,
+      "kallorii": 524.08
+    }
+  }
+]
