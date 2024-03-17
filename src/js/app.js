@@ -44,18 +44,18 @@ let totalCount = 0;
 function renderPopup(id) {
   const product = productsList.find((element) => element.id === id);
   const souses = addititionalProducts.map(
-    (item) =>
+    (item, index) =>
       `<div class="ingredients__row">
                     <div class="ingredients__title-wrap">
                       <div class="ingredients__title">${item.name} &nbsp;</div>
                       <div class="ingredients__price">+ ${item.price} ₽</div>
                     </div>
-                    <div class="ingredients__counter">
-                      <button class="counter__btn-prev">
+                    <div class="ingredients__counter" data-counter>
+                      <button class="counter__btn counter__btn-prev" data-id=${index}>
                         -
                       </button>
-                      <input type="number" value="0" min="0" max="10" />
-                      <button class="counter__btn-next">
+                      <input class="counter__input" type="number" value="0"  />
+                      <button class="counter__btn counter__btn-next" data-id=${index}>
                         +
                       </button>
                     </div>
@@ -99,7 +99,7 @@ function renderPopup(id) {
               </div>
               <div class="popup__score">
                 <div class="score__title">Соус на выбор</div>
-                <div class="score__total"><span>0</span>/10 ₽</div>
+                <div class="score__total"><span>0</span>/10 </div>
               </div>
               <div class="popup__ingredients ingredients">
                 <div class="ingridients__rows">
@@ -116,6 +116,41 @@ function renderPopup(id) {
 
   popupContent.innerHTML = popupLeft + popupRight;
 
+  let totalSum = 0;
+
+  function updateTotalPrice() {
+    const scoreTotal = document.querySelector(".score__total");
+    const ingredientsCounter = document.querySelectorAll(
+      ".ingredients__counter"
+    );
+    ingredientsCounter.forEach((item) => {
+      const souseId = item.dataset.id;
+      console.log(souseId);
+      souseId.addEventListener("click", () => {
+        dataset.id === 0
+          ? (totalSum -= souses.prise)
+          : (totalSum += souses.prise);
+      });
+    });
+    const sousesPrice = totalSum + " ₽";
+    scoreTotal.insertAdjacentHTML("beforeend", sousesPrice);
+  }
+
+  updateTotalPrice();
+
+  // function addSousePrice(souseId) {
+  //   const selectedSouce = souses.find((souse) => souse.id === souseId);
+  //   if (selectedSouce) {
+  //     totalSum += selectedSouce.price;
+  //     updateTotalPrice();
+  //   }
+  // }
+  // addSousePrice(souseId);
+
+  // addititionalProducts.forEach((item) => {
+  //   if (prevBtn) totalPrice -= item.price;
+  // });
+
   const ingridients = document.querySelectorAll(".ingredients__counter");
   const totalIngridients = document.querySelector(".score__total");
   ingridients.forEach((item) => {
@@ -123,10 +158,15 @@ function renderPopup(id) {
     const prevBtn = item.children[0];
     const nextBtn = item.children[2];
     const input = item.children[1];
-    prevBtn.style.cursor = "not-allowed";
-    prevBtn.style.color = "red";
+    // prevBtn.style.cursor = "not-allowed";
+    // prevBtn.style.border = "1px #c4c4c4";
+    prevBtn.style.color = "#c4c4c4";
     prevBtn.addEventListener("click", () => {
       if (totalCount <= 0 || count <= 0) {
+        prevBtn.style.color = "#c4c4c4";
+        // const sauceId = parseInt(prevBtn.dataset.id);
+        // addSousePrice(sauceId);
+        // nextBtn.style.cursor = "default";
         return;
       }
       totalCount -= 1;
@@ -138,8 +178,10 @@ function renderPopup(id) {
     });
     nextBtn.addEventListener("click", () => {
       if (totalCount >= 10 || count >= 10) {
-        nextBtn.style.cursor = "not-allowed";
-        nextBtn.style.color = "red";
+        // sauceId = parseInt(nextBtn.dataset.id);
+        // addSousePrice(sauceId);
+        nextBtn.style.color = "#c4c4c4";
+        nextBtn.style.cursor = "default";
         return;
       }
       totalCount += 1;
@@ -150,5 +192,41 @@ function renderPopup(id) {
       prevBtn.style.color = "black";
     });
   });
+
+  // const counters = document.querySelectorAll("[data-counter]");
+  // if (counters) {
+  //   counters.forEach((counter) => {
+  //     counter.addEventListener("click", (e) => {
+  //       const target = e.target;
+
+  //       if (target.closest(".counter__btn")) {
+  //         let value = parseInt(
+  //           target.closest(".ingredients__counter").querySelector("input").value
+  //         );
+  //         // let value = parseInt(
+  //         //   (target.closest(".ingredients__counter")
+  //         // ).querySelector("input").value;
+  //         if (target.classList.contains(".counter__btn-prev")) {
+  //           value--;
+  //         } else {
+  //           value++;
+  //         }
+
+  //         if (value <= 0) {
+  //           value = 0;
+  //           target
+  //             .closest(".ingredients__counter")
+  //             .querySelector(".counter__btn-prev")
+  //             .classList.add("disabled");
+  //           // } else if (value <= 10) {
+  //           //   value = 10;
+  //           // }
+  //           target
+  //             .closest(".ingredients__counter")
+  //             .querySelector(".counter__input").value = value;
+  //         }
+  //       }
+  //     });
+  //   });
+  // }
 }
-// function counter
